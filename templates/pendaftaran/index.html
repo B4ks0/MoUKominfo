@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Beranda - Portal Kerja Sama Wartawan{% endblock %}
+
+{% block content %}
+<div class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold">Portal Kerja Sama Wartawan</h1>
+                <p class="lead">Dinas Komunikasi dan Informatika Kabupaten Minahasa</p>
+                <p>Mudahkan proses pendaftaran dan pengelolaan data wartawan yang ingin menjalin kerja sama dengan Kominfo Minahasa.</p>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'pendaftaran:register' %}" class="btn btn-light btn-lg">Buat Permohonan</a>
+                    <a href="{% url 'pendaftaran:check_status' %}" class="btn btn-outline-light btn-lg">Cek Status</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="row g-3 w-100">
+                        <div class="col-md-6 text-center">
+                            <img src="{% static 'logo_minahasa.png' %}" alt="Logo Minahasa" class="img-fluid rounded" style="max-height: 150px;">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src="{% static 'logo_kominfo.png' %}" alt="Logo Kominfo" class="img-fluid rounded" style="max-height: 150px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow">
+                <div class="card-body">
+                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Pendaftaran Mudah</h5>
+                    <p class="card-text">Proses pendaftaran online yang sederhana dan cepat untuk wartawan.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Verifikasi Cepat</h5>
+                    <p class="card-text">Tim kami akan memverifikasi data Anda dengan segera.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow">
+                <div class="card-body">
+                    <i class="fas fa-handshake fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Kerja Sama Profesional</h5>
+                    <p class="card-text">Bangun kerja sama yang profesional dan transparan dengan Kominfo Minahasa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2>Tentang Portal Ini</h2>
+                <p>Portal ini dirancang untuk memudahkan proses pendaftaran dan pengelolaan data wartawan yang ingin menjalin kerja sama dengan Dinas Komunikasi dan Informatika Kabupaten Minahasa. Dengan antarmuka yang mudah digunakan, Anda dapat mendaftar secara online dan mengunggah dokumen persyaratan dengan cepat.</p>
+                <p>Kami berkomitmen untuk memberikan layanan yang efisien dan profesional dalam mengelola data wartawan di Kabupaten Minahasa.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/500x300?text=Tentang+Portal" alt="Tentang Portal" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,450 @@
+{% extends 'base.html' %}
+
+{% block title %}Pendaftaran Wartawan{% endblock %}
+
+{% block extra_head %}
+<style>
+    .file-input {
+        display: none;
+    }
+    .file-label {
+        cursor: pointer;
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        display: inline-block;
+        width: 100%;
+    }
+    .file-label:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Step Progress Bar */
+    .step-progress {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .step {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .step-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e9ecef;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border: 2px solid #dee2e6;
+        transition: all 0.3s ease;
+    }
+    .step.active .step-circle {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+    .step.completed .step-circle {
+        background-color: #28a745;
+        color: white;
+        border-color: #28a745;
+    }
+    .step-line {
+        width: 100px;
+        height: 2px;
+        background-color: #dee2e6;
+        margin: 0 10px;
+    }
+    .step.completed + .step-line {
+        background-color: #28a745;
+    }
+    .step-label {
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8rem;
+        color: #6c757d;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* Multi-step form */
+    .form-step {
+        display: none;
+    }
+    .form-step.active {
+        display: block;
+    }
+    .step-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    .step-navigation .btn {
+        flex: 0 0 auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="text-center mb-4">Formulir Pendaftaran Wartawan</h2>
+
+            <!-- Step Progress Bar -->
+            <div class="step-progress">
+                <div class="step active">
+                    <div class="step-circle"><i class="fas fa-user"></i></div>
+                    <div class="step-label">Biodata</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle"><i class="fas fa-file-alt"></i></div>
+                    <div class="step-label">Dokumen</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle"><i class="fas fa-clock"></i></div>
+                    <div class="step-label">Pending</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle"><i class="fas fa-check-circle"></i></div>
+                    <div class="step-label">Verifikasi</div>
+                </div>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" id="registrationForm">
+                {% csrf_token %}
+
+                <!-- Step 1: Biodata -->
+                <div class="form-step active" id="step1">
+                    <h4 class="mb-3">Informasi Pribadi</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nama_lengkap.id_for_label }}" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                            {{ form.nama_lengkap }}
+                            {% if form.nama_lengkap.errors %}
+                                <div class="text-danger">{{ form.nama_lengkap.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.nama_media.id_for_label }}" class="form-label">Nama Media atau Organisasi <span class="text-danger">*</span></label>
+                            {{ form.nama_media }}
+                            {% if form.nama_media.errors %}
+                                <div class="text-danger">{{ form.nama_media.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.jabatan.id_for_label }}" class="form-label">Jabatan di Media <span class="text-danger">*</span></label>
+                            {{ form.jabatan }}
+                            {% if form.jabatan.errors %}
+                                <div class="text-danger">{{ form.jabatan.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email <span class="text-danger">*</span></label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.no_hp.id_for_label }}" class="form-label">Nomor HP <span class="text-danger">*</span></label>
+                            {{ form.no_hp }}
+                            {% if form.no_hp.errors %}
+                                <div class="text-danger">{{ form.no_hp.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.alamat.id_for_label }}" class="form-label">Alamat Lengkap <span class="text-danger">*</span></label>
+                            {{ form.alamat }}
+                            {% if form.alamat.errors %}
+                                <div class="text-danger">{{ form.alamat.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Documents -->
+                <div class="form-step" id="step2">
+                    <h4 class="mb-3">Dokumen Persyaratan</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.surat_kerja_sama.id_for_label }}" class="form-label">Surat Kerja Sama</label>
+                            <input type="file" class="file-input" id="{{ form.surat_kerja_sama.id_for_label }}" name="{{ form.surat_kerja_sama.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.surat_kerja_sama.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.surat_kerja_sama.errors %}
+                                <div class="text-danger">{{ form.surat_kerja_sama.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.company_profile.id_for_label }}" class="form-label">Company Profile</label>
+                            <input type="file" class="file-input" id="{{ form.company_profile.id_for_label }}" name="{{ form.company_profile.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.company_profile.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.company_profile.errors %}
+                                <div class="text-danger">{{ form.company_profile.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Add more file fields similarly -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.susunan_redaksi.id_for_label }}" class="form-label">Susunan Redaksi</label>
+                            <input type="file" class="file-input" id="{{ form.susunan_redaksi.id_for_label }}" name="{{ form.susunan_redaksi.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.susunan_redaksi.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.susunan_redaksi.errors %}
+                                <div class="text-danger">{{ form.susunan_redaksi.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.foto_kantor_redaksi.id_for_label }}" class="form-label">Foto Kantor Redaksi</label>
+                            <input type="file" class="file-input" id="{{ form.foto_kantor_redaksi.id_for_label }}" name="{{ form.foto_kantor_redaksi.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.foto_kantor_redaksi.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.foto_kantor_redaksi.errors %}
+                                <div class="text-danger">{{ form.foto_kantor_redaksi.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Continue for all file fields -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.surat_tugas.id_for_label }}" class="form-label">Surat Tugas</label>
+                            <input type="file" class="file-input" id="{{ form.surat_tugas.id_for_label }}" name="{{ form.surat_tugas.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.surat_tugas.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.surat_tugas.errors %}
+                                <div class="text-danger">{{ form.surat_tugas.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.surat_keputusan.id_for_label }}" class="form-label">Surat Keputusan</label>
+                            <input type="file" class="file-input" id="{{ form.surat_keputusan.id_for_label }}" name="{{ form.surat_keputusan.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.surat_keputusan.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.surat_keputusan.errors %}
+                                <div class="text-danger">{{ form.surat_keputusan.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.bukti_penerimaan_surat.id_for_label }}" class="form-label">Bukti Penerimaan Surat (BPS)</label>
+                            <input type="file" class="file-input" id="{{ form.bukti_penerimaan_surat.id_for_label }}" name="{{ form.bukti_penerimaan_surat.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.bukti_penerimaan_surat.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.bukti_penerimaan_surat.errors %}
+                                <div class="text-danger">{{ form.bukti_penerimaan_surat.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.sppl.id_for_label }}" class="form-label">SPPL</label>
+                            <input type="file" class="file-input" id="{{ form.sppl.id_for_label }}" name="{{ form.sppl.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.sppl.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.sppl.errors %}
+                                <div class="text-danger">{{ form.sppl.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.surat_keterangan_fiskal.id_for_label }}" class="form-label">Surat Keterangan Fiskal</label>
+                            <input type="file" class="file-input" id="{{ form.surat_keterangan_fiskal.id_for_label }}" name="{{ form.surat_keterangan_fiskal.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.surat_keterangan_fiskal.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.surat_keterangan_fiskal.errors %}
+                                <div class="text-danger">{{ form.surat_keterangan_fiskal.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.ktp.id_for_label }}" class="form-label">Kartu Tanda Penduduk (KTP)</label>
+                            <input type="file" class="file-input" id="{{ form.ktp.id_for_label }}" name="{{ form.ktp.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.ktp.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.ktp.errors %}
+                                <div class="text-danger">{{ form.ktp.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.kartu_pers.id_for_label }}" class="form-label">Kartu Pers</label>
+                            <input type="file" class="file-input" id="{{ form.kartu_pers.id_for_label }}" name="{{ form.kartu_pers.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.kartu_pers.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.kartu_pers.errors %}
+                                <div class="text-danger">{{ form.kartu_pers.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.sertifikat_kompetensi.id_for_label }}" class="form-label">Sertifikat Kompetensi</label>
+                            <input type="file" class="file-input" id="{{ form.sertifikat_kompetensi.id_for_label }}" name="{{ form.sertifikat_kompetensi.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.sertifikat_kompetensi.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.sertifikat_kompetensi.errors %}
+                                <div class="text-danger">{{ form.sertifikat_kompetensi.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.surat_pernyataan.id_for_label }}" class="form-label">Surat Pernyataan</label>
+                            <input type="file" class="file-input" id="{{ form.surat_pernyataan.id_for_label }}" name="{{ form.surat_pernyataan.name }}" accept=".pdf,.jpg,.png">
+                            <label for="{{ form.surat_pernyataan.id_for_label }}" class="file-label">Pilih file (PDF, JPG, PNG)</label>
+                            {% if form.surat_pernyataan.errors %}
+                                <div class="text-danger">{{ form.surat_pernyataan.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-navigation">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+                    <button type="button" class="btn btn-success" id="submitBtn" style="display: none;">Daftar</button>
+                </div>
+                <div id="validationError" class="text-danger mt-3" style="display: none;">Harap lengkapi semua field biodata sebelum melanjutkan.</div>
+
+                <!-- Success Message -->
+                <div id="successMessage" class="text-center mt-4" style="display: none;">
+                    <h4 class="text-success">Permohonan Berhasil Diajukan!</h4>
+                    <p>Nomor Permohonan: <strong id="applicationId"></strong></p>
+                    <p class="text-muted">Permohonan mu saat ini sedang di proses.</p>
+                    <a href="{% url 'pendaftaran:check_status' %}" class="btn btn-primary">Cek Status</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Multi-step form navigation
+    let currentStep = 1;
+    const totalSteps = 2;
+
+    const steps = document.querySelectorAll('.step');
+    const formSteps = document.querySelectorAll('.form-step');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function updateStepIndicator() {
+        steps.forEach((step, index) => {
+            if (index + 1 === currentStep) {
+                step.classList.add('active');
+                step.classList.remove('completed');
+            } else if (index + 1 < currentStep) {
+                step.classList.add('completed');
+                step.classList.remove('active');
+            } else {
+                step.classList.remove('active', 'completed');
+            }
+        });
+    }
+
+    function showStep(stepNumber) {
+        formSteps.forEach(step => step.classList.remove('active'));
+        document.getElementById(`step${stepNumber}`).classList.add('active');
+
+        if (stepNumber === 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            submitBtn.style.display = 'none';
+        } else if (stepNumber === totalSteps) {
+            prevBtn.style.display = 'inline-block';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'inline-block';
+        }
+
+        updateStepIndicator();
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (currentStep === 1) {
+            // Validate biodata step
+            const requiredFields = [
+                'nama_lengkap',
+                'nama_media',
+                'jabatan',
+                'email',
+                'no_hp',
+                'alamat'
+            ];
+
+            let isValid = true;
+            requiredFields.forEach(fieldName => {
+                const field = document.getElementById(`id_${fieldName}`);
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            if (!isValid) {
+                const errorDiv = document.getElementById('validationError');
+                errorDiv.style.display = 'block';
+                return;
+            } else {
+                const errorDiv = document.getElementById('validationError');
+                errorDiv.style.display = 'none';
+            }
+        }
+
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    submitBtn.addEventListener('click', () => {
+        // Generate application ID
+        const applicationId = 'NRP-' + Math.floor(1000 + Math.random() * 9000);
+
+        // Hide form and navigation buttons
+        document.getElementById('registrationForm').style.display = 'none';
+        document.querySelector('.step-navigation').style.display = 'none';
+
+        // Show success message
+        const successMessage = document.getElementById('successMessage');
+        document.getElementById('applicationId').textContent = applicationId;
+        successMessage.style.display = 'block';
+
+        // Update step indicator to "Pending"
+        currentStep = 3; // Pending step
+        updateStepIndicator();
+    });
+
+    // Initialize first step
+    showStep(currentStep);
+
+    // Update file label when file is selected
+    document.querySelectorAll('.file-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const label = this.nextElementSibling;
+            if (this.files.length > 0) {
+                label.textContent = this.files[0].name;
+            } else {
+                label.textContent = 'Pilih file (PDF, JPG, PNG)';
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

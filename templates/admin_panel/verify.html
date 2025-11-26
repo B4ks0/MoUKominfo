@@ -1,0 +1,103 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Verifikasi Data Wartawan{% endblock %}
+
+{% block content %}
+<div class="p-4">
+        <h2>Verifikasi Data - {{ wartawan.nama_lengkap }}</h2>
+        <p><strong>Nomor Permohonan:</strong> {{ wartawan.nrp }}</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Data Pribadi</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Nama Lengkap:</strong> {{ wartawan.nama_lengkap }}</p>
+                        <p><strong>Nama Media:</strong> {{ wartawan.nama_media }}</p>
+                        <p><strong>Jabatan:</strong> {{ wartawan.jabatan }}</p>
+                        <p><strong>Email:</strong> {{ wartawan.email }}</p>
+                        <p><strong>No HP:</strong> {{ wartawan.no_hp }}</p>
+                        <p><strong>Alamat:</strong> {{ wartawan.alamat }}</p>
+                        <p><strong>Status Saat Ini:</strong> <span class="badge bg-{% if wartawan.status == 'pending' %}warning{% elif wartawan.status == 'approved' %}success{% else %}danger{% endif %}">{{ wartawan.get_status_display }}</span></p>
+                        <p><strong>Tanggal Daftar:</strong> {{ wartawan.tanggal_daftar|date:"d M Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Dokumen yang Diunggah</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if wartawan.surat_kerja_sama %}
+                            <p><strong>Surat Kerja Sama:</strong> <a href="/media/{{ wartawan.surat_kerja_sama }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.company_profile %}
+                            <p><strong>Company Profile:</strong> <a href="/media/{{ wartawan.company_profile }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.susunan_redaksi %}
+                            <p><strong>Susunan Redaksi:</strong> <a href="/media/{{ wartawan.susunan_redaksi }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.foto_kantor_redaksi %}
+                            <p><strong>Foto Kantor Redaksi:</strong> <a href="/media/{{ wartawan.foto_kantor_redaksi }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.surat_tugas %}
+                            <p><strong>Surat Tugas:</strong> <a href="/media/{{ wartawan.surat_tugas }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.surat_keputusan %}
+                            <p><strong>Surat Keputusan:</strong> <a href="/media/{{ wartawan.surat_keputusan }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.bukti_penerimaan_surat %}
+                            <p><strong>Bukti Penerimaan Surat:</strong> <a href="/media/{{ wartawan.bukti_penerimaan_surat }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.sppl %}
+                            <p><strong>SPPL:</strong> <a href="/media/{{ wartawan.sppl }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.surat_keterangan_fiskal %}
+                            <p><strong>Surat Keterangan Fiskal:</strong> <a href="/media/{{ wartawan.surat_keterangan_fiskal }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.ktp %}
+                            <p><strong>KTP:</strong> <a href="/media/{{ wartawan.ktp }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.kartu_pers %}
+                            <p><strong>Kartu Pers:</strong> <a href="/media/{{ wartawan.kartu_pers }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.sertifikat_kompetensi %}
+                            <p><strong>Sertifikat Kompetensi:</strong> <a href="/media/{{ wartawan.sertifikat_kompetensi }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                        {% if wartawan.surat_pernyataan %}
+                            <p><strong>Surat Pernyataan:</strong> <a href="/media/{{ wartawan.surat_pernyataan }}" target="_blank">Lihat</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Ubah Status Verifikasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">Status Baru</label>
+                                <select name="status" class="form-select" required>
+                                    <option value="pending" {% if wartawan.status == 'pending' %}selected{% endif %}>Pending</option>
+                                    <option value="approved" {% if wartawan.status == 'approved' %}selected{% endif %}>Approved</option>
+                                    <option value="rejected" {% if wartawan.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin ingin mengubah status?')">Ubah Status</button>
+                            <a href="{% url 'admin_panel:manage' %}" class="btn btn-secondary">Kembali</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

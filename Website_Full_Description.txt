@@ -1,0 +1,88 @@
+Portal Kerja Sama Wartawan - Kominfo Minahasa
+============================================
+
+I. Pendahuluan
+--------------
+Portal Kerja Sama Wartawan - Kominfo Minahasa adalah sebuah platform berbasis PHP vanilla yang dirancang untuk memudahkan proses pendaftaran dan pengelolaan data wartawan yang ingin menjalin kerja sama dengan Dinas Komunikasi dan Informatika Kabupaten Minahasa. Website ini menyediakan layanan lengkap bagi wartawan untuk mendaftar secara online serta bagi admin untuk melakukan verifikasi dan pengelolaan data yang efisien dan profesional.
+
+II. Fitur dan Fasilitas untuk Pengguna Publik (Wartawan)
+--------------------------------------------------------
+1. Halaman Beranda (index.php)
+   - Menampilkan informasi portal, tujuan, dan keunggulan layanan.
+   - Menyajikan fitur "Pendaftaran Mudah", "Verifikasi Cepat", dan "Kerja Sama Profesional".
+   - Terdapat akses tombol "Daftar Sekarang" yang mengarahkan ke formulir pendaftaran.
+
+2. Formulir Pendaftaran Wartawan (register.php)
+   - Pengguna dapat mengisi data pribadi lengkap, termasuk:
+        * Nama lengkap
+        * Nama media atau organisasi
+        * Jabatan di media
+        * Email yang valid
+        * Nomor HP (dengan validasi panjang digit 10-15)
+        * Alamat lengkap
+   - Mengunggah dokumen penting sebagai persyaratan, antara lain:
+        * Surat Kerja Sama
+        * Company Profile
+        * Susunan Redaksi
+        * Foto Kantor Redaksi
+        * Surat Tugas
+        * Surat Keputusan
+        * Bukti Penerimaan Surat (BPS)
+        * SPPL
+        * Surat Keterangan Fiskal
+        * Kartu Tanda Penduduk (KTP)
+        * Kartu Pers
+        * Sertifikat Kompetensi
+        * Surat Pernyataan
+   - Setiap file diunggah dengan validasi tipe file (PDF, JPG, PNG).
+   - Sistem menyimpan berkas unggahan dengan nama unik yang mengandung timestamp.
+   - Setelah pengisian dan pengunggahan berkas, data disimpan dengan status awal "pending".
+   - Pengguna menerima notifikasi bahwa pendaftaran berhasil dan menunggu konfirmasi admin.
+
+III. Fitur dan Fasilitas untuk Admin
+-----------------------------------
+1. Sistem Login Admin (login.php)
+   - Admin dapat masuk dengan menggunakan username dan password yang tersimpan di database.
+   - Password disimpan secara aman dengan metode hashing.
+   - Session digunakan untuk menjaga keamanan akses halaman admin.
+
+2. Dashboard Admin (dashboard.php)
+   - Menampilkan statistik keseluruhan seperti total pendaftar, yang menunggu verifikasi, disetujui, dan ditolak.
+   - Grafik visualisasi status verifikasi menggunakan Chart.js untuk memudahkan monitoring.
+   - Tabel data jurnalistik terbaru yang menunjukkan data 5 pendaftar terakhir.
+   - Navigasi sidebar menyediakan akses cepat ke halaman penting termasuk manajemen data, auto verifikasi, laporan, serta logout.
+
+3. Manajemen Data Wartawan (manage.php)
+   - Menampilkan daftar lengkap wartawan yang telah mendaftar dengan informasi singkat.
+   - Fasilitas pencarian dan filter berdasarkan status verifikasi.
+   - Admin dapat mengubah status aplikasi menjadi pending, approved (disetujui), atau rejected (ditolak).
+   - Fitur hapus data wartawan dengan konfirmasi untuk mencegah penghapusan tidak sengaja.
+   - Tautan untuk melihat detail lengkap tiap pendaftar.
+
+4. Verifikasi Detail Data Wartawan (verify.php)
+   - Menampilkan data lengkap wartawan termasuk data pribadi dan dokumen yang diunggah.
+   - Tautan untuk mengakses semua dokumen yang telah diunggah dalam tab baru.
+   - Formulir untuk mengubah status verifikasi dengan konfirmasi sebelum perubahan disimpan.
+   - Menjamin admin dapat melakukan verifikasi secara teliti dan terdokumentasi.
+
+5. Fitur Tambahan
+   - Halaman auto verification (auto_verify.php) disediakan untuk memproses verifikasi otomatis (fitur ini disebut di dashboard dan menu, namun detail implementasi belum dicek).
+   - Halaman laporan (report.php) yang kemungkinan digunakan untuk menghasilkan laporan dalam format PDF atau serupa.
+   - Fitur logout pada setiap halaman admin dengan konfirmasi agar keamanan sesi terjaga.
+
+IV. Rincian Teknis
+-----------------
+- Platform ini dikembangkan menggunakan PHP vanilla dengan backend MySQL/MariaDB yang dikonfigurasi di `config/config.php`.
+- Frontend menggunakan framework Bootstrap 5 untuk tata letak responsif dan FontAwesome untuk ikon.
+- Efek interaktif dan notifikasi menggunakan SweetAlert2.
+- Visualisasi data menggunakan Chart.js.
+- Upload file disimpan pada direktori `assets/uploads/` dengan penamaan timestamp dan jenis file untuk unik dan mudah pengelolaan.
+- Keamanan login admin dengan session management dan password hashing.
+- Validasi form menggabungkan validasi sisi klien (frontend) dan sisi server (backend).
+- UI didesain agar responsif dan mudah digunakan di perangkat desktop dan mobile.
+
+V. Kesimpulan
+-------------
+Website Portal Kerja Sama Wartawan ini menyediakan sistem yang komprehensif dan efisien untuk pengelolaan pendaftaran dan verifikasi wartawan di Kabupaten Minahasa. Dengan antarmuka yang mudah digunakan untuk pengguna dan admin, serta fitur lengkap mulai dari pendaftaran, upload dokumen, hingga dashboard pengelolaan dan laporan, sistem ini mendukung pengelolaan data wartawan secara profesional dan transparan sesuai kebutuhan Dinas Komunikasi dan Informatika Kabupaten Minahasa.
+
+Dokumen ini merupakan ringkasan lengkap dari struktur, fitur, fasilitas, dan teknologi yang digunakan pada website ini.

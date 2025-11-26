@@ -1,0 +1,26 @@
+/* Custom CSS */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    overflow-y: auto;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.img-thumbnail {
+    max-width: 100%;
+    height: auto;
+}
