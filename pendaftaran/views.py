@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import WartawanForm
+from .forms import WartawanForm, StatusCheckForm
 from .models import Wartawan
 
 def index(request):
@@ -21,8 +21,9 @@ def check_status(request):
     status_result = None
     show_toast = False
     if request.method == 'POST':
-        nrp = request.POST.get('nrp')
-        if nrp:
+        form = StatusCheckForm(request.POST)
+        if form.is_valid():
+            nrp = form.cleaned_data['nrp']
             try:
                 wartawan = Wartawan.objects.get(nrp=nrp)
                 show_toast = True
@@ -34,4 +35,7 @@ def check_status(request):
                 }
             except Wartawan.DoesNotExist:
                 messages.error(request, 'NRP tidak ditemukan.')
-    return render(request, 'pendaftaran/check_status.html', {'status_result': status_result, 'show_toast': show_toast})
+    else:
+        form = StatusCheckForm()
+        
+    return render(request, 'pendaftaran/check_status.html', {'form': form, 'status_result': status_result, 'show_toast': show_toast})

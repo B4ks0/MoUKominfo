@@ -1,5 +1,7 @@
 Django==5.2.4
 django-recaptcha==4.1.0
+django-simple-captcha
 djangorestframework==3.16.0
 argparse==1.4.0
+mysqlclient
 # Add other project-specific dependencies here

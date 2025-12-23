@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pendaftaran.urls')),
     path('admin-panel/', include('admin_panel.urls')),
+    path('captcha/', include('captcha.urls')),
 ]

@@ -11,11 +11,13 @@
         align-items: center;
         margin-bottom: 2rem;
     }
+
     .step {
         display: flex;
         align-items: center;
         position: relative;
     }
+
     .step-circle {
         width: 50px;
         height: 50px;
@@ -29,25 +31,30 @@
         border: 2px solid #dee2e6;
         transition: all 0.3s ease;
     }
+
     .step.active .step-circle {
         background-color: #007bff;
         color: white;
         border-color: #007bff;
     }
+
     .step.completed .step-circle {
         background-color: #28a745;
         color: white;
         border-color: #28a745;
     }
+
     .step-line {
         width: 100px;
         height: 2px;
         background-color: #dee2e6;
         margin: 0 10px;
     }
-    .step.completed + .step-line {
+
+    .step.completed+.step-line {
         background-color: #28a745;
     }
+
     .step-label {
         position: absolute;
         top: 60px;
@@ -69,9 +76,22 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="nrp" class="form-label">Masukkan Nomor Registrasi Permohonan (NRP) Anda:</label>
-                    <input type="text" class="form-control" id="nrp" name="nrp" placeholder="Contoh: NRP-20251126-0001" required>
+                    <label for="{{ form.nrp.id_for_label }}" class="form-label">Masukkan Nomor Registrasi Permohonan
+                        (NRP) Anda:</label>
+                    {{ form.nrp }}
+                    {% if form.nrp.errors %}
+                    <div class="text-danger mt-1">{{ form.nrp.errors.0 }}</div>
+                    {% endif %}
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Keamanan <span class="text-danger">*</span></label>
+                    {{ form.captcha }}
+                    {% if form.captcha.errors %}
+                    <div class="text-danger mt-1">{{ form.captcha.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Cek Status</button>
             </form>
 
@@ -88,7 +108,8 @@
                     <div class="step-label">Dokumen</div>
                 </div>
                 <div class="step-line"></div>
-                <div class="step {% if status_result.status == 'Pending' %}active{% elif status_result.status == 'Approved' %}completed{% endif %}">
+                <div
+                    class="step {% if status_result.status == 'Pending' %}active{% elif status_result.status == 'Approved' %}completed{% endif %}">
                     <div class="step-circle"><i class="fas fa-clock"></i></div>
                     <div class="step-label">Pending</div>
                 </div>
@@ -107,7 +128,8 @@
                     <p class="mb-1"><strong>NRP:</strong> {{ status_result.nrp }}</p>
                     <p class="mb-1"><strong>Nama Lengkap:</strong> {{ status_result.nama }}</p>
                     <p class="mb-1"><strong>Status:</strong>
-                        <span class="badge {% if status_result.status == 'Approved' %}bg-success{% elif status_result.status == 'Pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                        <span
+                            class="badge {% if status_result.status == 'Approved' %}bg-success{% elif status_result.status == 'Pending' %}bg-warning{% else %}bg-danger{% endif %}">
                             {{ status_result.status }}
                         </span>
                     </p>

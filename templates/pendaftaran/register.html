@@ -301,6 +301,17 @@
                                 <div class="text-danger">{{ form.surat_pernyataan.errors.0 }}</div>
                             {% endif %}
                         </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Keamanan <span class="text-danger">*</span></label>
+                            {{ form.captcha }}
+                            {% if form.captcha.errors %}
+                                <div class="text-danger">{{ form.captcha.errors.0 }}</div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 
@@ -308,17 +319,9 @@
                 <div class="step-navigation">
                     <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
                     <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
-                    <button type="button" class="btn btn-success" id="submitBtn" style="display: none;">Daftar</button>
+                    <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">Daftar</button>
                 </div>
                 <div id="validationError" class="text-danger mt-3" style="display: none;">Harap lengkapi semua field biodata sebelum melanjutkan.</div>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="text-center mt-4" style="display: none;">
-                    <h4 class="text-success">Permohonan Berhasil Diajukan!</h4>
-                    <p>Nomor Permohonan: <strong id="applicationId"></strong></p>
-                    <p class="text-muted">Permohonan mu saat ini sedang di proses.</p>
-                    <a href="{% url 'pendaftaran:check_status' %}" class="btn btn-primary">Cek Status</a>
-                </div>
             </form>
         </div>
     </div>
@@ -382,10 +385,10 @@
             let isValid = true;
             requiredFields.forEach(fieldName => {
                 const field = document.getElementById(`id_${fieldName}`);
-                if (!field.value.trim()) {
+                if (field && !field.value.trim()) {
                     field.classList.add('is-invalid');
                     isValid = false;
-                } else {
+                } else if (field) {
                     field.classList.remove('is-invalid');
                 }
             });
@@ -411,24 +414,6 @@
             currentStep--;
             showStep(currentStep);
         }
-    });
-
-    submitBtn.addEventListener('click', () => {
-        // Generate application ID
-        const applicationId = 'NRP-' + Math.floor(1000 + Math.random() * 9000);
-
-        // Hide form and navigation buttons
-        document.getElementById('registrationForm').style.display = 'none';
-        document.querySelector('.step-navigation').style.display = 'none';
-
-        // Show success message
-        const successMessage = document.getElementById('successMessage');
-        document.getElementById('applicationId').textContent = applicationId;
-        successMessage.style.display = 'block';
-
-        // Update step indicator to "Pending"
-        currentStep = 3; // Pending step
-        updateStepIndicator();
     });
 
     // Initialize first step

@@ -1,7 +1,9 @@
 from django import forms
+from captcha.fields import CaptchaField
 from .models import Wartawan
 
 class WartawanForm(forms.ModelForm):
+    captcha = CaptchaField()
     class Meta:
         model = Wartawan
         fields = [
@@ -24,3 +26,7 @@ class WartawanForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if isinstance(field, forms.FileField):
                 field.required = False  # Make file fields optional as per description
+
+class StatusCheckForm(forms.Form):
+    nrp = forms.CharField(label='Nomor Permohonan (NRP)', max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Masukkan NRP Anda'}))
+    captcha = CaptchaField()
