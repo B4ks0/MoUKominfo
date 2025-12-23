@@ -8,9 +8,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{float}
-% \usepackage{fancyhdr} % Missing
-% \usepackage{titlesec} % Missing
-% \usepackage{enumitem} % Missing
 
 % Page setup
 \geometry{
@@ -25,6 +22,9 @@
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
 \linespread{1.0}
+
+% Fix vertical gaps
+\raggedbottom
 
 % Custom Header and Footer (Standard LaTeX)
 \makeatletter
@@ -49,7 +49,7 @@
 \makeatother
 \pagestyle{jointer}
 
-% Section formatting (Standard LaTeX)
+% Section formatting
 \makeatletter
 \renewcommand\section{\@startsection{section}{1}{\z@}%
   {-3.5ex \@plus -1ex \@minus -.2ex}%
@@ -59,10 +59,20 @@
   {-3.25ex\@plus -1ex \@minus -.2ex}%
   {1.5ex \@plus .2ex}%
   {\normalfont\fontsize{10}{12}\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\fontsize{10}{12}\bfseries}}
 \makeatother
 
-\renewcommand{\thesection}{\Roman{section}}
-\renewcommand{\thesubsection}{\Alph{subsection}}
+% Numbering Hierarchy
+\renewcommand{\thesection}{\Roman{section}}    % I, II, III
+\renewcommand{\thesubsection}{\Alph{subsection}} % A, B, C
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}} % 1, 2, 3
+
+% List Numbering
+\renewcommand{\labelenumi}{\arabic{enumi})}      % 1), 2)
+\renewcommand{\labelenumii}{\alph{enumii}.}      % a., b.
 
 \begin{document}
 
@@ -130,9 +140,9 @@ Sistem dikembangkan menggunakan metode Waterfall dengan tahapan Requirements Ana
 
 Teknologi yang digunakan meliputi Backend (Django 4.2, Python 3.11), Database (PostgreSQL 15), Frontend (Bootstrap 5, JavaScript), dan Deployment (Nginx, Gunicorn).
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{waterfall.jpg}
+\includegraphics[width=0.9\linewidth]{waterfall.jpg}
 \caption{Metode Waterfall}
 \label{fig:waterfall}
 \end{figure}
@@ -146,7 +156,7 @@ Instrumen yang digunakan adalah kuesioner SUS standar 10 item dengan skala Liker
 \subsubsection{Evaluasi Kualitas Sistem}
 Untuk mengukur kualitas sistem secara komprehensif, dilakukan evaluasi menggunakan kuesioner dengan Skala Likert yang mencakup tiga aspek utama yaitu desain antarmuka, kualitas layanan, dan efisiensi sistem. Kuesioner terdiri dari 15 pernyataan.
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{BOBOT PENILAIAN SKALA LIKERT}
 \label{tab:likert_weight}
@@ -163,7 +173,7 @@ Hasil kuesioner dihitung menggunakan rumus persentase sebagai berikut:
 \text{Persentase} = \frac{\text{Jumlah Skor}}{\text{Jumlah Skor Maksimal}} \times 100\%
 \end{equation}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{KATEGORI PENILAIAN KUALITAS SISTEM}
 \label{tab:likert_category}
@@ -187,46 +197,53 @@ Analisis statistik deskriptif dilakukan untuk menghitung mean, median, standar d
 \subsection{Desain Sistem}
 Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use Case Diagram menggambarkan interaksi antara dua aktor utama.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{usecase_diagram_new.jpg}
+\includegraphics[width=0.9\linewidth]{usecase_diagram_new.jpg}
 \caption{Use Case Diagram}
 \label{fig:usecase}
 \end{figure}
 
 Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian formulir hingga verifikasi admin.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{activity_diagram_new.jpg}
+\includegraphics[width=0.9\linewidth]{activity_diagram_new.jpg}
 \caption{Activity Diagram Pendaftaran}
 \label{fig:activity}
 \end{figure}
 
 Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{architecture_diagram.jpg}
+\includegraphics[width=0.9\linewidth]{architecture_diagram.jpg}
 \caption{Arsitektur Konseptual Sistem}
 \label{fig:architecture}
 \end{figure}
 
 Desain database menggunakan Entity Relationship Diagram (ERD).
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{database_erd.jpg}
+\includegraphics[width=0.9\linewidth]{database_erd.jpg}
 \caption{Entity Relationship Diagram (ERD) Database}
 \label{fig:erd}
 \end{figure}
 
-\subsection{Analisis Kinerja Komparatif}
+\subsection{Analisis Kinerja dan Efektivitas Sistem}
+Evaluasi kinerja sistem dilakukan dengan membandingkan efisiensi operasional antara metode manual dan sistem digital yang dikembangkan. Berdasarkan pengujian paired t-test, ditemukan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001, Cohen's d=3.79), yang mengindikasikan peningkatan efisiensi yang substansial. Gambar \ref{fig:performance} memvisualisasikan tren penurunan waktu pemrosesan yang drastis setelah penerapan sistem digital.
 
-\subsubsection{Waktu Pemrosesan}
-Tabel \ref{tab:processing_time} menunjukkan perbandingan waktu pemrosesan antara sistem manual dan digital.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{performance_comparison.jpg}
+\caption{Perbandingan Waktu Pemrosesan Manual vs Digital}
+\label{fig:performance}
+\end{figure}
 
-\begin{table}[H]
+Secara spesifik, Tabel \ref{tab:processing_time} memperlihatkan bahwa rata-rata waktu pemrosesan berkurang secara drastis dari 42.5 menit menjadi hanya 6.3 menit, mencapai reduksi waktu sebesar 85.2\%.
+
+\begin{table}[htbp]
 \centering
 \caption{PERBANDINGAN WAKTU PEMROSESAN}
 \label{tab:processing_time}
@@ -241,19 +258,9 @@ Min-Max & 25-72 & 4-11 & - \\ \hline
 \end{tabular}
 \end{table}
 
-Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001, Cohen's d=3.79). Gambar \ref{fig:performance} menunjukkan tren waktu pemrosesan.
+Selain kecepatan, akurasi data juga mengalami peningkatan signifikan. Seperti ditunjukkan pada Tabel \ref{tab:accuracy}, tingkat akurasi meningkat dari 81.7\% pada sistem manual menjadi 97.5\% pada sistem digital, sementara tingkat kesalahan (error rate) menurun dari 18.3\% menjadi 2.5\%.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\linewidth]{performance_comparison.jpg}
-\caption{Perbandingan Waktu Pemrosesan Manual vs Digital}
-\label{fig:performance}
-\end{figure}
-
-\subsubsection{Akurasi Data}
-Tabel \ref{tab:accuracy} menunjukkan perbandingan tingkat akurasi data.
-
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{PERBANDINGAN AKURASI DATA}
 \label{tab:accuracy}
@@ -266,23 +273,21 @@ Error Rate (per 100) & 18.3 & 2.5 \\ \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{Metrik Kinerja Sistem}
-Sistem digital menunjukkan performa teknis yang baik dengan average response time 1.4 detik, page load time 2.5 detik, throughput 115 pendaftaran per hari, system uptime 99.2\%.
+Pengujian teknis lebih lanjut menunjukkan bahwa sistem memiliki performa yang handal dengan \textit{average response time} 1.4 detik, \textit{page load time} 2.5 detik, \textit{throughput} 115 pendaftaran per hari, dan \textit{system uptime} mencapai 99.2\%.
 
-\subsection{Analisis Usabilitas}
-Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar deviasi 9.2, range 55.0-90.0, dengan grade B (Good).
+\subsection{Evaluasi Usabilitas dan Dampak Organisasi}
+Penerimaan pengguna terhadap sistem diukur menggunakan System Usability Scale (SUS) dengan 42 responden. Hasil analisis menunjukkan skor rata-rata (mean) sebesar 76.8, median 78.0, dan standar deviasi 9.2 dengan rentang 55.0-90.0, yang menempatkan sistem pada kategori Grade B (Good). Distribusi skor SUS dapat dilihat pada Gambar \ref{fig:sus_dist}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{sus_distribution.jpg}
+\includegraphics[width=0.9\linewidth]{sus_distribution.jpg}
 \caption{Distribusi Skor System Usability Scale}
 \label{fig:sus_dist}
 \end{figure}
 
-\subsection{Dampak Organisasional}
-Tabel \ref{tab:organizational} menunjukkan dampak kuantitatif terhadap organisasi.
+Dampak implementasi sistem terhadap organisasi sangat positif, seperti yang dirangkum dalam Tabel \ref{tab:organizational}. Pendaftaran per bulan meningkat dari 78 menjadi 92, jam kerja admin per bulan berkurang drastis dari 165 menjadi 28 jam, dan keluhan per bulan menurun dari 11 menjadi 2.
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{DAMPAK ORGANISASIONAL}
 \label{tab:organizational}
@@ -296,27 +301,26 @@ Keluhan/bulan & 11 & 2 \\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Implementasi Antarmuka}
-Implementasi antarmuka dirancang dengan prinsip user experience design.
+\subsection{Implementasi dan Pengujian Sistem}
+Antarmuka sistem dirancang dengan mengutamakan pengalaman pengguna (User Experience), memastikan kemudahan akses dan navigasi. Gambar \ref{fig:halaman_daftar} menampilkan halaman pendaftaran wartawan yang responsif, sedangkan Gambar \ref{fig:halaman_admin1} menampilkan dashboard admin untuk manajemen data.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{wartawan.jpg}
+\includegraphics[width=0.9\linewidth]{wartawan.jpg}
 \caption{Halaman Pendaftaran Wartawan}
 \label{fig:halaman_daftar}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{admin1.jpg}
+\includegraphics[width=0.9\linewidth]{admin1.jpg}
 \caption{Halaman Dashboard Admin}
 \label{fig:halaman_admin1}
 \end{figure}
 
-\subsection{Pengujian Fungsional}
-Pengujian sistem menggunakan metode Black Box Testing.
+Kualitas fungsional sistem divalidasi melalui pengujian Black Box Testing, yang memastikan setiap fitur dieksekusi sesuai spesifikasi. Hasil pengujian pada Tabel \ref{tab:blackbox} memperlihatkan bahwa seluruh fungsi utama—mulai dari halaman utama, pendaftaran, cek status, login admin, hingga verifikasi—berjalan sesuai harapan tanpa kesalahan.
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{PENGUJIAN BLACKBOX}
 \label{tab:blackbox}
