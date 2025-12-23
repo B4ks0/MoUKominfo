@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[10pt,a4paper,twocolumn]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[bahasa]{babel}
@@ -7,15 +7,16 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{url}
-\usepackage{booktabs}
-\usepackage{array}
+\usepackage{float}
+% \usepackage{fancyhdr} % Missing
+% \usepackage{titlesec} % Missing
+% \usepackage{enumitem} % Missing
 
 % Page setup
 \geometry{
     left=19mm,
     right=19mm,
-    top=25.4mm,
+    top=30mm,
     bottom=25.4mm,
     columnsep=4.22mm
 }
@@ -23,68 +24,82 @@
 % Font and spacing
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-\linespread{1.5}
+\linespread{1.0}
 
-% Simple page numbering
-\pagestyle{plain}
+% Custom Header and Footer (Standard LaTeX)
+\makeatletter
+\def\ps@jointer{
+    \renewcommand{\@oddhead}{%
+        \parbox{\textwidth}{%
+            \centering
+            {\fontsize{9}{11}\selectfont JOINTER : JOURNAL OF INFORMATICS ENGINEERING , VOL. 06, NO. 01, JUNI 2025}\\
+            \vspace{2pt}%
+            \thepage
+        }%
+    }
+    \renewcommand{\@evenhead}{\@oddhead}
+    \renewcommand{\@oddfoot}{%
+        \parbox{\textwidth}{%
+            \centering
+            {\fontsize{9}{11}\selectfont \itshape Wowor, dkk: Evaluasi Empiris Efektivitas Transformasi Digital...}
+        }%
+    }
+    \renewcommand{\@evenfoot}{\@oddfoot}
+}
+\makeatother
+\pagestyle{jointer}
 
-% Section formatting
+% Section formatting (Standard LaTeX)
 \makeatletter
 \renewcommand\section{\@startsection{section}{1}{\z@}%
   {-3.5ex \@plus -1ex \@minus -.2ex}%
-  {2.3ex \@plus.2ex}%
-  {\normalfont\fontsize{10}{12}\selectfont\scshape\centering}}
+  {1.5ex \@plus.2ex}%
+  {\normalfont\fontsize{10}{12}\bfseries\centering\MakeUppercase}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
   {-3.25ex\@plus -1ex \@minus -.2ex}%
   {1.5ex \@plus .2ex}%
-  {\normalfont\fontsize{10}{12}\selectfont\itshape}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-  {-3.25ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
-  {\normalfont\fontsize{10}{12}\selectfont\itshape}}
+  {\normalfont\fontsize{10}{12}\bfseries}}
 \makeatother
+
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\Alph{subsection}}
 
 \begin{document}
 
-% Title
+\twocolumn[
 \begin{center}
-\vspace*{0.5cm}
-{\fontsize{16}{20}\bfseries Perancangan dan Pembangunan Sistem Pendaftaran Online Wartawan Menggunakan Framework Django dengan Metode Waterfall\par}
-\vspace{0.4cm}
-{\fontsize{11}{13}\normalfont
-Imannuel Wowor$^{1*)}$, Gladly Caren Rorimpandey$^{1}$, Vandi V. Maswonggo$^{1}$\par
-\vspace{0.3cm}
-$^{1}$Program Studi Teknik Informatika, Universitas Negeri Manado, Indonesia\par
-\vspace{0.2cm}
-Email: 23210085@unima.ac.id
-}
+    \vspace*{-5mm}
+    {\fontsize{14}{16}\bfseries EVALUASI EMPIRIS EFEKTIVITAS TRANSFORMASI DIGITAL PADA LAYANAN AKREDITASI MEDIA PEMERINTAH DAERAH: ANALISIS KOMPARATIF PERFORMA DAN USABILITAS\par}
+    \vspace{6mm}
+    
+    {\fontsize{10}{12}\selectfont
+    \textbf{Imannuel Wowor$^{1}$, Gladly Caren Rorimpandey$^{1}$, Vandi V. Maswonggo$^{1}$}\par
+    \vspace{2mm}
+    \textit{$^{1}$Program Studi Teknik Informatika, Universitas Negeri Manado}\par
+    \textit{Email: 23210085@unima.ac.id}\par
+    }
+    \vspace{6mm}
 \end{center}
 
-\vspace{0.3cm}
+{\fontsize{9}{11}\selectfont
+\noindent\textbf{Abstract--}As technology develops in our lives, this results in demands in every aspect, specifically in government institutions. The high failure rate of e-government projects in developing countries often stems from a lack of empirical evaluation regarding their actual impact on operational efficiency. This study fills a critical gap in the literature by providing a quantitative comparative analysis of manual versus digital journalist accreditation processes within the Communication and Information Office (Kominfo). Moving beyond simple system construction, this research evaluates the effectiveness of a Django-based digital transformation solution using a rigorous mixed-method approach. Our findings demonstrate a statistically significant reduction in processing time by 85.2\% (from 42.5 to 6.3 minutes, p<0.001) and an improvement in data accuracy by 92.8\%. Furthermore, the system achieved a System Usability Scale (SUS) score of 76.8 (Grade B), indicating high user acceptance. This research contributes a validated framework for evaluating government digital services and offers empirical evidence that modernization using robust open-source frameworks significantly enhances public service delivery performance.
 
-\noindent\textbf{Abstract}---Digital transformation in government agencies requires empirical evidence of effectiveness beyond system implementation. This research addresses the gap in quantitative evaluation of digital registration systems through a comparative study between manual and digital journalist registration processes at the Communication and Information Office (Kominfo). Using a mixed-method approach combining system development with Django framework and comprehensive evaluation including performance metrics, System Usability Scale, and comparative time-motion study, this research found that the digital system achieved 85.2\% reduction in average processing time from 42.5 to 6.3 minutes, 92.8\% improvement in data accuracy, SUS score of 76.8 (Grade B), and significant organizational benefits. Statistical analysis using paired t-test with p<0.001 confirms significant performance improvement. This study contributes empirical evidence on digital transformation effectiveness in Indonesian government context.
+\vspace{2mm}
+\noindent\textbf{\textit{Keywords--Digital Transformation, Process Optimization, System Usability Scale, E-Government Impact, Comparative Analysis.}}
 
-\vspace{0.2cm}
+\vspace{4mm}
 
-\noindent\textbf{Keywords}---Digital Transformation, E-Government Evaluation, System Usability Scale, Performance Metrics, Comparative Analysis, Django Framework.
+\noindent\textbf{Abstrak--}Seiring berkembangnya teknologi di dalam setiap kehidupan kita ini, hal ini mengakibatkan tuntutan disetiap aspek, khususnya digitalisasi pemerintahan. Tingginya tingkat kegagalan proyek e-government di negara berkembang seringkali disebabkan oleh kurangnya evaluasi empiris mengenai dampak aktualnya terhadap efisiensi operasional. Penelitian ini mengisi kesenjangan kritis dalam literatur dengan menyajikan analisis komparatif kuantitatif antara proses akreditasi wartawan manual dan digital di Dinas Komunikasi dan Informatika (Kominfo). Melampaui sekadar konstruksi sistem, riset ini mengevaluasi efektivitas solusi transformasi digital berbasis Django menggunakan pendekatan metode campuran yang ketat. Temuan kami menunjukkan pengurangan waktu pemrosesan yang signifikan secara statistik sebesar 85,2\% (dari 42,5 menjadi 6,3 menit, p<0.001) dan peningkatan akurasi data sebesar 92,8\%. Lebih lanjut, sistem mencapai skor System Usability Scale (SUS) 76,8 (Grade B), mengindikasikan penerimaan pengguna yang tinggi. Penelitian ini berkontribusi dengan menyediakan kerangka kerja tervalidasi untuk evaluasi layanan digital pemerintah dan menawarkan bukti empiris bahwa modernisasi menggunakan framework open-source yang tangguh secara signifikan meningkatkan kinerja pelayanan publik.
 
-\vspace{0.3cm}
+\vspace{2mm}
+\noindent\textbf{\textit{Kata Kunci--Transformasi Digital, Optimasi Proses, System Usability Scale, Dampak E-Government, Analisis Komparatif.}}
+}
+\vspace{8mm}
+]
 
-\noindent\textbf{Abstrak}---Transformasi digital pada instansi pemerintah memerlukan bukti empiris efektivitas yang melampaui sekadar implementasi sistem. Penelitian ini mengisi kesenjangan riset dalam evaluasi kuantitatif sistem pendaftaran digital melalui studi komparatif antara proses pendaftaran wartawan manual dan digital di Dinas Komunikasi dan Informatika (Kominfo). Menggunakan pendekatan metode campuran yang menggabungkan pengembangan sistem dengan framework Django dan evaluasi komprehensif meliputi metrik kinerja, System Usability Scale, dan studi time-motion komparatif, penelitian ini menemukan bahwa sistem digital mencapai reduksi 85,2\% dalam rata-rata waktu pemrosesan dari 42,5 menjadi 6,3 menit, peningkatan 92,8\% dalam akurasi data, skor SUS 76,8 (Grade B), dan manfaat organisasional yang signifikan. Analisis statistik menggunakan paired t-test dengan p<0,001 mengkonfirmasi peningkatan kinerja yang signifikan. Studi ini berkontribusi pada bukti empiris efektivitas transformasi digital dalam konteks pemerintahan Indonesia.
-
-\vspace{0.2cm}
-
-\noindent\textbf{Kata Kunci}---Transformasi Digital, Evaluasi E-Government, System Usability Scale, Metrik Kinerja, Analisis Komparatif, Framework Django.
-
-\vspace{0.3cm}
-
-\newpage
-\twocolumn
+\setcounter{page}{1}
 
 \section{PENDAHULUAN}
-
 Transformasi digital telah menjadi tuntutan bagi instansi pemerintah untuk meningkatkan efisiensi dan transparansi pelayanan publik. Namun, implementasi sistem digital seringkali dilakukan tanpa evaluasi empiris yang memadai terhadap dampak aktualnya. Di Indonesia, banyak instansi pemerintah mengadopsi sistem informasi berbasis web, namun literatur ilmiah yang mendokumentasikan efektivitas kuantitatif implementasi tersebut masih terbatas [1]. Di Dinas Komunikasi dan Informatika (Kominfo), proses pendaftaran wartawan yang masih bersifat manual menghadapi tantangan signifikan dalam hal efisiensi waktu, akurasi data, dan beban administratif. Proses manual memakan waktu rata-rata 42,5 menit per pendaftaran, dengan tingkat kesalahan data mencapai 18,3\%, dan memerlukan 165 jam kerja staf per bulan untuk mengelola rata-rata 78 pendaftaran.
 
 Tinjauan literatur sistematis mengidentifikasi beberapa kesenjangan penelitian yang perlu diisi. Sebagian besar publikasi tentang sistem pendaftaran digital di Indonesia bersifat deskriptif dan tidak menyertakan pengukuran kinerja kuantitatif. Studi oleh Nugroho et al. menyoroti bahwa hanya 23\% artikel e-government Indonesia yang melaporkan metrik kinerja terukur [2]. Penelitian terdahulu juga jarang membandingkan sistem digital dengan proses manual menggunakan metodologi eksperimental. Tanpa baseline komparatif, klaim peningkatan efisiensi tidak dapat divalidasi secara ilmiah. Instrumen standar seperti System Usability Scale (SUS) jarang diterapkan dalam konteks e-government Indonesia, padahal keberhasilan sistem bergantung pada penerimaan pengguna [3]. Literatur yang ada cenderung fokus pada aspek teknis namun mengabaikan dampak terhadap produktivitas organisasi dan efisiensi operasional [4].
@@ -93,31 +108,27 @@ Penelitian ini dirancang untuk menjawab tiga pertanyaan utama. Pertama, seberapa
 
 \section{TINJAUAN PUSTAKA}
 
-\noindent A. E-Government dan Transformasi Digital
-
+\subsection{E-Government dan Transformasi Digital}
 E-government didefinisikan sebagai penggunaan teknologi informasi dan komunikasi untuk meningkatkan efisiensi, transparansi, dan aksesibilitas layanan pemerintah. Penelitian oleh Mensah et al. terhadap 147 implementasi e-government di negara berkembang menemukan bahwa hanya 34\% yang melaporkan evaluasi dampak kuantitatif [1]. Hal ini menekankan pentingnya penelitian berbasis bukti dalam domain ini.
 
-\noindent B. Evaluasi Kinerja Sistem Informasi
-
+\subsection{Evaluasi Kinerja Sistem Informasi}
 DeLone dan McLean memperbarui model kesuksesan sistem informasi dengan menekankan pentingnya pengukuran net benefits [5]. Metrik kinerja yang relevan meliputi efisiensi waktu, akurasi data, throughput, dan response time.
 
-\noindent C. System Usability Scale (SUS)
-
+\subsection{System Usability Scale (SUS)}
 SUS adalah instrumen standar industri untuk mengukur usabilitas dengan 10 item pertanyaan yang menghasilkan skor 0-100 [6]. Bangor et al. menetapkan interpretasi skor: <50 (F), 50-62 (D), 63-72 (C), 73-85 (B), >85 (A) [7]. Studi oleh Lewis menunjukkan bahwa skor SUS >68 mengindikasikan usabilitas di atas rata-rata [8].
 
-\noindent D. Framework Django
-
+\subsection{Framework Django}
 Django adalah framework web Python yang mengikuti prinsip Model-Template-View (MTV) dan menekankan keamanan, skalabilitas, dan rapid development [9]. Penelitian oleh Patel dan Patel membandingkan Django dengan framework lain untuk aplikasi pemerintah dan menemukan keunggulan dalam built-in security features, admin interface yang dapat dikustomisasi, dan ORM yang robust [10].
 
 \section{METODOLOGI}
 
-\noindent A. Metode Pengumpulan Data
-
+\subsection{Metode Pengumpulan Data}
 Penelitian ini menggunakan mixed-method approach yang menggabungkan development research, quasi-experimental study, survey research, dan quantitative analysis. Hipotesis penelitian yang diuji adalah sistem digital secara signifikan mengurangi waktu pemrosesan pendaftaran dibandingkan sistem manual (H1), sistem digital secara signifikan meningkatkan akurasi data dibandingkan sistem manual (H2), dan sistem digital mencapai skor SUS >68 (H3).
 
-\noindent B. Metode Pengembangan Sistem
-
+\subsection{Metode Pengembangan Sistem}
 Sistem dikembangkan menggunakan metode Waterfall dengan tahapan Requirements Analysis, System Design, Implementation, Testing, dan Deployment [11]. Pemilihan Waterfall didasarkan pada kebutuhan yang well-defined dan lingkungan pemerintah yang memerlukan dokumentasi lengkap.
+
+Teknologi yang digunakan meliputi Backend (Django 4.2, Python 3.11), Database (PostgreSQL 15), Frontend (Bootstrap 5, JavaScript), dan Deployment (Nginx, Gunicorn).
 
 \begin{figure}[h]
 \centering
@@ -126,19 +137,14 @@ Sistem dikembangkan menggunakan metode Waterfall dengan tahapan Requirements Ana
 \label{fig:waterfall}
 \end{figure}
 
-Teknologi yang digunakan meliputi Backend (Django 4.2, Python 3.11), Database (PostgreSQL 15), Frontend (Bootstrap 5, JavaScript), dan Deployment (Nginx, Gunicorn).
+\subsubsection{Data Kinerja Sistem}
+Periode pengumpulan data dilakukan selama 3 bulan (Agustus-Oktober 2024). Sampel terdiri dari 50 pendaftaran sistem manual (baseline) dan 50 pendaftaran sistem digital (post- implementation). Metrik yang diukur meliputi Processing Time, Data Accuracy, Error Rate, System Response Time, dan Throughput.
 
-1) \textit{Data Kinerja Sistem}
-
-Periode pengumpulan data dilakukan selama 3 bulan (Agustus-Oktober 2024). Sampel terdiri dari 50 pendaftaran sistem manual (baseline) dan 50 pendaftaran sistem digital (post-implementation). Metrik yang diukur meliputi Processing Time, Data Accuracy, Error Rate, System Response Time, dan Throughput.
-
-2) \textit{Data Usabilitas (SUS)}
-
+\subsubsection{Data Usabilitas (SUS)}
 Instrumen yang digunakan adalah kuesioner SUS standar 10 item dengan skala Likert 1-5. Responden terdiri dari 42 pengguna (28 wartawan, 14 admin Kominfo) yang dipilih menggunakan purposive sampling dengan kriteria telah menggunakan sistem minimal 2 kali dan bersedia berpartisipasi.
 
-3) \textit{Evaluasi Kualitas Sistem}
-
-Untuk mengukur kualitas sistem secara komprehensif, dilakukan evaluasi menggunakan kuesioner dengan Skala Likert yang mencakup tiga aspek utama yaitu desain antarmuka, kualitas layanan, dan efisiensi sistem. Kuesioner terdiri dari 15 pernyataan dengan pilihan jawaban Sangat Setuju (SS), Setuju (S), Cukup (C), Tidak Setuju (TS), dan Sangat Tidak Setuju (STS). Bobot penilaian untuk setiap pilihan jawaban ditunjukkan pada Tabel \ref{tab:likert_weight}.
+\subsubsection{Evaluasi Kualitas Sistem}
+Untuk mengukur kualitas sistem secara komprehensif, dilakukan evaluasi menggunakan kuesioner dengan Skala Likert yang mencakup tiga aspek utama yaitu desain antarmuka, kualitas layanan, dan efisiensi sistem. Kuesioner terdiri dari 15 pernyataan.
 
 \begin{table}[h]
 \centering
@@ -153,12 +159,9 @@ Untuk mengukur kualitas sistem secara komprehensif, dilakukan evaluasi menggunak
 \end{table}
 
 Hasil kuesioner dihitung menggunakan rumus persentase sebagai berikut:
-
 \begin{equation}
 \text{Persentase} = \frac{\text{Jumlah Skor}}{\text{Jumlah Skor Maksimal}} \times 100\%
 \end{equation}
-
-Kategori penilaian kualitas sistem berdasarkan persentase yang diperoleh ditunjukkan pada Tabel \ref{tab:likert_category}.
 
 \begin{table}[h]
 \centering
@@ -176,15 +179,13 @@ Kategori penilaian kualitas sistem berdasarkan persentase yang diperoleh ditunju
 \end{tabular}
 \end{table}
 
-\noindent C. Analisis Data
-
-Analisis statistik deskriptif dilakukan untuk menghitung mean, median, standar deviasi, dan distribusi frekuensi untuk semua variabel kuantitatif. Uji hipotesis menggunakan paired t-test untuk membandingkan waktu pemrosesan dan akurasi antara sistem manual dan digital (H1, H2), dan one-sample t-test untuk menguji apakah skor SUS >68 (H3). Tingkat signifikansi ditetapkan pada α = 0.05 menggunakan software SPSS 27.
+\subsection{Analisis Data}
+Analisis statistik deskriptif dilakukan untuk menghitung mean, median, standar deviasi, dan distribusi frekuensi untuk semua variabel kuantitatif. Uji hipotesis menggunakan paired t-test untuk membandingkan waktu pemrosesan dan akurasi antara sistem manual dan digital (H1, H2), dan one-sample t-test untuk menguji apakah skor SUS >68 (H3). Tingkat signifikansi ditetapkan pada $\alpha = 0.05$ menggunakan software SPSS 27.
 
 \section{HASIL DAN PEMBAHASAN}
 
-\noindent A. Desain Sistem
-
-Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use Case Diagram menggambarkan interaksi antara dua aktor utama yaitu Wartawan yang dapat mendaftar online, mengunggah dokumen, dan mengecek status verifikasi, serta Admin Kominfo yang dapat mengelola data, memverifikasi informasi, dan membuat laporan.
+\subsection{Desain Sistem}
+Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use Case Diagram menggambarkan interaksi antara dua aktor utama.
 
 \begin{figure}[h]
 \centering
@@ -193,7 +194,7 @@ Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use C
 \label{fig:usecase}
 \end{figure}
 
-Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian formulir hingga verifikasi admin, termasuk decision points untuk validasi data dan approval process.
+Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian formulir hingga verifikasi admin.
 
 \begin{figure}[h]
 \centering
@@ -202,7 +203,7 @@ Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian fo
 \label{fig:activity}
 \end{figure}
 
-Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}, yang menggambarkan empat layer utama: Presentation Layer untuk antarmuka pengguna, Application Layer yang mengimplementasikan business logic menggunakan Django MTV pattern, Data Layer untuk penyimpanan data menggunakan PostgreSQL, serta Security Layer dan Infrastructure yang mendukung keamanan dan deployment sistem.
+Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}.
 
 \begin{figure}[h]
 \centering
@@ -211,7 +212,7 @@ Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}, yan
 \label{fig:architecture}
 \end{figure}
 
-Desain database menggunakan Entity Relationship Diagram (ERD) yang ditunjukkan pada Gambar \ref{fig:erd}. Sistem menggunakan SQLite3 sebagai database dengan model utama Wartawan yang menyimpan 23 field termasuk data pribadi wartawan dan 13 dokumen pendukung. Database juga mengintegrasikan model bawaan Django untuk autentikasi (User), manajemen sesi (Session), content types, permissions, dan audit trail (LogEntry).
+Desain database menggunakan Entity Relationship Diagram (ERD).
 
 \begin{figure}[h]
 \centering
@@ -220,10 +221,9 @@ Desain database menggunakan Entity Relationship Diagram (ERD) yang ditunjukkan p
 \label{fig:erd}
 \end{figure}
 
-\noindent B. Analisis Kinerja Komparatif
+\subsection{Analisis Kinerja Komparatif}
 
-1) \textit{Waktu Pemrosesan}
-
+\subsubsection{Waktu Pemrosesan}
 Tabel \ref{tab:processing_time} menunjukkan perbandingan waktu pemrosesan antara sistem manual dan digital.
 
 \begin{table}[h]
@@ -241,7 +241,7 @@ Min-Max & 25-72 & 4-11 & - \\ \hline
 \end{tabular}
 \end{table}
 
-Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001, Cohen's d=3.79), mengindikasikan effect size yang sangat besar. Sistem digital mengurangi waktu pemrosesan rata-rata sebesar 36.2 menit (85.2\%). Reduksi ini disebabkan oleh eliminasi input data manual berulang, validasi otomatis, workflow terintegrasi, dan notifikasi real-time. Gambar \ref{fig:performance} menunjukkan tren waktu pemrosesan selama periode pengamatan 20 hari.
+Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001, Cohen's d=3.79). Gambar \ref{fig:performance} menunjukkan tren waktu pemrosesan.
 
 \begin{figure}[h]
 \centering
@@ -250,8 +250,7 @@ Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001
 \label{fig:performance}
 \end{figure}
 
-2) \textit{Akurasi Data}
-
+\subsubsection{Akurasi Data}
 Tabel \ref{tab:accuracy} menunjukkan perbandingan tingkat akurasi data.
 
 \begin{table}[h]
@@ -267,15 +266,11 @@ Error Rate (per 100) & 18.3 & 2.5 \\ \hline
 \end{tabular}
 \end{table}
 
-Paired t-test menunjukkan peningkatan signifikan (t(49)=14.23, p<0.001). Peningkatan 15.8 poin persentase (92.8\% peningkatan relatif) dalam akurasi data. Sistem digital mengurangi kesalahan melalui validasi input real-time, dropdown untuk data terstruktur, format otomatis, dan pengecekan duplikasi otomatis.
+\subsubsection{Metrik Kinerja Sistem}
+Sistem digital menunjukkan performa teknis yang baik dengan average response time 1.4 detik, page load time 2.5 detik, throughput 115 pendaftaran per hari, system uptime 99.2\%.
 
-3) \textit{Metrik Kinerja Sistem}
-
-Sistem digital menunjukkan performa teknis yang baik dengan average response time 1.4 detik, page load time 2.5 detik, throughput 115 pendaftaran per hari, system uptime 99.2\%, dan dapat menangani 45 concurrent users.
-
-\noindent C. Analisis Usabilitas
-
-Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar deviasi 9.2, range 55.0-90.0, dengan grade B (Good) dan percentile rank 72nd. One-sample t-test terhadap benchmark 68 menunjukkan skor SUS secara signifikan lebih tinggi (t(41)=6.21, p<0.001). Skor 76.8 menempatkan sistem pada kategori "Good" (Grade B) dan berada di atas persentil 72, mengindikasikan usabilitas yang lebih baik dari 72\% sistem lain. Gambar \ref{fig:sus_dist} menunjukkan distribusi skor SUS dari 42 responden.
+\subsection{Analisis Usabilitas}
+Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar deviasi 9.2, range 55.0-90.0, dengan grade B (Good).
 
 \begin{figure}[h]
 \centering
@@ -284,8 +279,7 @@ Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar d
 \label{fig:sus_dist}
 \end{figure}
 
-\noindent D. Dampak Organisasional
-
+\subsection{Dampak Organisasional}
 Tabel \ref{tab:organizational} menunjukkan dampak kuantitatif terhadap organisasi.
 
 \begin{table}[h]
@@ -302,11 +296,8 @@ Keluhan/bulan & 11 & 2 \\ \hline
 \end{tabular}
 \end{table}
 
-Sistem digital meningkatkan throughput 17.9\%, mengurangi jam kerja administratif 83.0\% (137 jam/bulan), dan mengurangi keluhan 81.8\%.
-
-\noindent E. Implementasi Antarmuka
-
-Implementasi antarmuka dirancang dengan prinsip user experience design untuk memastikan sistem mudah digunakan.
+\subsection{Implementasi Antarmuka}
+Implementasi antarmuka dirancang dengan prinsip user experience design.
 
 \begin{figure}[h]
 \centering
@@ -322,9 +313,8 @@ Implementasi antarmuka dirancang dengan prinsip user experience design untuk mem
 \label{fig:halaman_admin1}
 \end{figure}
 
-\noindent F. Pengujian Fungsional
-
-Pengujian sistem menggunakan metode Black Box Testing untuk memastikan setiap fungsi berjalan sesuai dengan kebutuhan.
+\subsection{Pengujian Fungsional}
+Pengujian sistem menggunakan metode Black Box Testing.
 
 \begin{table}[h]
 \centering
@@ -343,11 +333,10 @@ Pengujian sistem menggunakan metode Black Box Testing untuk memastikan setiap fu
 \end{tabular}
 \end{table}
 
-\noindent G. Pembahasan
+\subsection{Pembahasan}
+Temuan penelitian ini sejalan dan memperluas literatur yang ada. Reduksi waktu pemrosesan sebesar 85.2\% lebih tinggi dibandingkan Kumar et al. yang melaporkan 76\%. Skor SUS 76.8 sebanding dengan benchmark e-government.
 
-Temuan penelitian ini sejalan dan memperluas literatur yang ada. Reduksi waktu pemrosesan sebesar 85.2\% lebih tinggi dibandingkan Kumar et al. yang melaporkan 76\%, kemungkinan karena baseline manual yang lebih tidak efisien [12]. Skor SUS 76.8 sebanding dengan benchmark e-government pada rentang 75-80, mengindikasikan kualitas implementasi yang baik. Penelitian ini mengkonfirmasi bahwa kualitas sistem (waktu respons, keandalan) dan kualitas informasi (akurasi) berkontribusi pada manfaat bersih (dampak organisasional), sesuai dengan model DeLone \& McLean [5]. Skor SUS yang tinggi berkorelasi dengan rendahnya tingkat keluhan, menekankan bahwa usabilitas bukan hanya metrik teknis tetapi berdampak pada kepuasan pengguna.
-
-\section{KESIMPULAN}
+\section{KESIMPULAN DAN SARAN}
 
 Berdasarkan penelitian yang telah dilakukan, dapat disimpulkan bahwa sistem digital mencapai reduksi 85.2\% dalam waktu pemrosesan dari 42.5 menjadi 6.3 menit dengan signifikansi statistik p<0.001 dan peningkatan 92.8\% dalam akurasi data dari 81.7\% menjadi 97.5\% dengan p<0.001. Sistem mencapai skor SUS 76.8 (Grade B - Good), secara signifikan di atas benchmark 68. Implementasi sistem menghasilkan penghematan 137 jam kerja per bulan (83.0\% reduksi), peningkatan throughput 17.9\%, dan pengurangan keluhan sebesar 81.8\%. Penelitian ini berkontribusi pada bukti empiris efektivitas transformasi digital dalam konteks pemerintahan Indonesia dengan menyediakan data terukur tentang peningkatan kinerja sistem digital dibandingkan manual. Hasil penelitian mengintegrasikan metode evaluasi ganda yang dapat diadopsi untuk penelitian serupa dan menyediakan benchmark kuantitatif bagi instansi pemerintah lain yang merencanakan digitalisasi.
 
@@ -360,40 +349,60 @@ Untuk penelitian mendatang, disarankan melakukan studi multi-site pada berbagai 
 Penelitian ini berhasil diselesaikan tidak lepas dari bantuan beberapa pihak, untuk itu penulis ingin mengucapkan terima kasih kepada Rektor Universitas Negeri Manado, Dekan Fakultas Teknik Universitas Negeri Manado, Pimpinan dan Dosen Program Studi Teknik Informatika Fakultas Teknik Universitas Negeri Manado, Dosen Pembimbing Akademik, Dosen Pembimbing Skripsi, Orang Tua dan Keluarga, Teman-teman Teknik Informatika Angkatan 2023, dan Dinas Komunikasi dan Informatika.
 
 \section*{DAFTAR PUSTAKA}
-\fontsize{8}{10}\selectfont
+\renewcommand\refname{} 
+\vspace{-1cm}
+\begin{thebibliography}{00}
 
-[1] I. K. Mensah, M. Zeng, and J. Luo, "E-government services adoption: An extension of the unified theory of acceptance and use of technology model," \textit{SAGE Open}, vol. 12, no. 2, 2022.
+\bibitem{1} United Nations, "E-Government Survey 2022: The Future of Digital Government," UN Dept. of Economic and Social Affairs, New York, 2022.
 
-[2] A. R. Nugroho, D. I. Sensuse, and W. C. Wibowo, "A systematic literature review on e-government research in Indonesia: Research trends, methods, and future directions," \textit{Journal of Physics: Conference Series}, vol. 1898, no. 1, p. 012040, 2022.
+\bibitem{2} R. Heeks, "Information and Communication Technology for Development (ICT4D)," \textit{Routledge}, 2017.
 
-[3] J. Brooke, "SUS: A 'quick and dirty' usability scale," in \textit{Usability Evaluation in Industry}, P. W. Jordan et al., Eds. London: Taylor \& Francis, 1996, pp. 189-194.
+\bibitem{3} S. Agarwal and D. Gupta, "Challenges in E-Government Implementation in Developing Countries," \textit{International Journal of Computer Applications}, vol. 182, no. 44, pp. 12-16, 2019.
 
-[4] United Nations, "E-Government Survey 2022: The Future of Digital Government," United Nations Department of Economic and Social Affairs, 2022.
+\bibitem{4} I. K. Mensah, M. Zeng, and J. Luo, "E-government services adoption: An extension of the unified theory of acceptance and use of technology model," \textit{SAGE Open}, vol. 12, no. 2, 2022.
 
-[5] W. H. DeLone and E. R. McLean, "Information systems success measurement," \textit{Foundations and Trends in Information Systems}, vol. 2, no. 1, pp. 1-116, 2016.
+\bibitem{5} A. R. Nugroho, D. I. Sensuse, and W. C. Wibowo, "A systematic literature review on e-government research in Indonesia," \textit{Journal of Physics: Conf. Ser.}, vol. 1898, 2021.
 
-[6] S. Petter, W. DeLone, and E. R. McLean, "Information systems success: The quest for the independent variables," \textit{Journal of Management Information Systems}, vol. 29, no. 4, pp. 7-62, 2013.
+\bibitem{6} J. Nielsen, "Usability Engineering," \textit{Morgan Kaufmann}, 1993.
 
-[7] A. Bangor, P. T. Kortum, and J. T. Miller, "An empirical evaluation of the System Usability Scale," \textit{International Journal of Human-Computer Interaction}, vol. 24, no. 6, pp. 574-594, 2008.
+\bibitem{7} M. Janssen et al., "Factors influencing the adoption of E-Government services," \textit{Government Information Quarterly}, vol. 38, no. 4, 2021.
 
-[8] J. R. Lewis, "The System Usability Scale: Past, present, and future," \textit{International Journal of Human-Computer Interaction}, vol. 34, no. 7, pp. 577-590, 2018.
+\bibitem{8} R. Heeks, "Most eGovernment-for-Development Projects Fail: How Can Risks be Reduced?," \textit{i-Government Working Paper Series}, no. 14, 2003.
 
-[9] R. Silva, M. Oliveira, and J. Santos, "Django framework adoption in Brazilian e-government: A case study on development efficiency and security," \textit{Electronic Government, an International Journal}, vol. 19, no. 2, pp. 156-178, 2023.
+\bibitem{9} A. Holovaty and J. Kaplan-Moss, "The Definitive Guide to Django: Web Development Done Right," \textit{Apress}, 2009.
 
-[10] K. Patel and H. Patel, "Comparative analysis of web frameworks for e-government applications: Django vs. Laravel vs. Spring Boot," \textit{Journal of Web Engineering}, vol. 21, no. 4, pp. 1127-1152, 2022.
+\bibitem{10} A. M. Al-Khouri, "eGovernment Strategies: The Case of UAE," \textit{European Journal of ePractice}, vol. 17, 2012.
 
-[11] R. S. Pressman and B. R. Maxim, \textit{Software Engineering: A Practitioner's Approach}, 9th ed. McGraw-Hill Education, 2019.
+\bibitem{11} A. R. Nugroho et al., "Indonesian E-Government Research Trends," \textit{J. Phys: Conf. Ser.}, 2022.
 
-[12] A. Kumar, R. Sharma, and P. Singh, "Performance evaluation of online registration systems in Indian government: A comparative study," \textit{International Journal of Electronic Government Research}, vol. 19, no. 1, pp. 45-62, 2023.
+\bibitem{12} R. Silva, M. Oliveira, and J. Santos, "Django framework adoption in Brazilian e-government: A case study on development efficiency and security," \textit{Electronic Government}, vol. 19, no. 2, pp. 156-178, 2023.
 
-[13] M. Alshehri and S. Drew, "E-government fundamentals," in \textit{ICT for a Better Life and a Better World}, Springer, 2020, pp. 91-104.
+\bibitem{13} K. Patel and H. Patel, "Comparative analysis of web frameworks for e-government applications: Django vs. Laravel vs. Spring Boot," \textit{Journal of Web Engineering}, vol. 21, no. 4, 2022.
 
-[14] J. Sauro and J. R. Lewis, "Sample size for usability tests mostly wrong," \textit{Journal of Usability Studies}, vol. 16, no. 3, pp. 129-150, 2021.
+\bibitem{14} W. H. DeLone and E. R. McLean, "Information systems success measurement," \textit{Foundations and Trends in Information Systems}, vol. 2, 2016.
 
-[15] T. van Dijk, "Digital divide research, achievements and shortcomings," \textit{Poetics}, vol. 34, no. 4-5, pp. 221-235, 2020.
+\bibitem{15} J. Brooke, "SUS: A 'quick and dirty' usability scale," in \textit{Usability Evaluation in Industry}, London: Taylor \& Francis, 1996.
 
-[16] Y. K. Dwivedi et al., "Impact of COVID-19 pandemic on information management research and practice: Transforming education, work and life," \textit{International Journal of Information Management}, vol. 55, art. 102211, 2020.
+\bibitem{16} A. Bangor, P. T. Kortum, and J. T. Miller, "An empirical evaluation of the System Usability Scale," \textit{Intl. Journal of Human-Computer Interaction}, 2008.
 
-[17] H. J. Scholl and M. C. Scholl, "Smart governance: A roadmap for research and practice," in \textit{Proceedings of the 51st Hawaii International Conference on System Sciences}, 2021, pp. 2881-2890.
+\bibitem{17} J. R. Lewis, "The System Usability Scale: Past, present, and future," \textit{Intl. Journal of Human-Computer Interaction}, 2018.
+
+\bibitem{18} Y. K. Dwivedi et al., "Impact of COVID-19 pandemic on information management research," \textit{Intl. Journal of Information Management}, 2020.
+
+\bibitem{19} H. J. Scholl, "Smart governance: A roadmap for research and practice," \textit{HICSS}, 2021.
+
+\bibitem{20} T. Berners-Lee, "The World Wide Web: A very short personal history," \textit{W3C}, 1998.
+
+\bibitem{21} M. Fowler, "Patterns of Enterprise Application Architecture," \textit{Addison-Wesley}, 2002.
+
+\bibitem{22} B. Schneier, "Applied Cryptography," \textit{John Wiley \& Sons}, 2015.
+
+\bibitem{23} ISO/IEC 25010:2011, "Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE)," \textit{ISO}, 2011.
+
+\bibitem{24} S. Gregor and A. Hevner, "Positioning and Presenting Design Science Research for Maximum Impact," \textit{MIS Quarterly}, vol. 37, no. 2, 2013.
+
+\bibitem{25} K. Peffers et al., "A Design Science Research Methodology for Information Systems Research," \textit{Journal of Management Information Systems}, 2007.
+
+\end{thebibliography}
 
 \end{document}
