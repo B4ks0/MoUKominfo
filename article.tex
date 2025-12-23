@@ -130,7 +130,7 @@ Sistem dikembangkan menggunakan metode Waterfall dengan tahapan Requirements Ana
 
 Teknologi yang digunakan meliputi Backend (Django 4.2, Python 3.11), Database (PostgreSQL 15), Frontend (Bootstrap 5, JavaScript), dan Deployment (Nginx, Gunicorn).
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{waterfall.jpg}
 \caption{Metode Waterfall}
@@ -146,7 +146,7 @@ Instrumen yang digunakan adalah kuesioner SUS standar 10 item dengan skala Liker
 \subsubsection{Evaluasi Kualitas Sistem}
 Untuk mengukur kualitas sistem secara komprehensif, dilakukan evaluasi menggunakan kuesioner dengan Skala Likert yang mencakup tiga aspek utama yaitu desain antarmuka, kualitas layanan, dan efisiensi sistem. Kuesioner terdiri dari 15 pernyataan.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{BOBOT PENILAIAN SKALA LIKERT}
 \label{tab:likert_weight}
@@ -163,7 +163,7 @@ Hasil kuesioner dihitung menggunakan rumus persentase sebagai berikut:
 \text{Persentase} = \frac{\text{Jumlah Skor}}{\text{Jumlah Skor Maksimal}} \times 100\%
 \end{equation}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{KATEGORI PENILAIAN KUALITAS SISTEM}
 \label{tab:likert_category}
@@ -187,7 +187,7 @@ Analisis statistik deskriptif dilakukan untuk menghitung mean, median, standar d
 \subsection{Desain Sistem}
 Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use Case Diagram menggambarkan interaksi antara dua aktor utama.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{usecase_diagram_new.jpg}
 \caption{Use Case Diagram}
@@ -196,7 +196,7 @@ Perancangan sistem dimodelkan menggunakan UML (Unified Modeling Language). Use C
 
 Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian formulir hingga verifikasi admin.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{activity_diagram_new.jpg}
 \caption{Activity Diagram Pendaftaran}
@@ -205,7 +205,7 @@ Activity Diagram menggambarkan alur kerja pendaftaran wartawan dari pengisian fo
 
 Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{architecture_diagram.jpg}
 \caption{Arsitektur Konseptual Sistem}
@@ -214,7 +214,7 @@ Arsitektur konseptual sistem ditunjukkan pada Gambar \ref{fig:architecture}.
 
 Desain database menggunakan Entity Relationship Diagram (ERD).
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{database_erd.jpg}
 \caption{Entity Relationship Diagram (ERD) Database}
@@ -226,7 +226,7 @@ Desain database menggunakan Entity Relationship Diagram (ERD).
 \subsubsection{Waktu Pemrosesan}
 Tabel \ref{tab:processing_time} menunjukkan perbandingan waktu pemrosesan antara sistem manual dan digital.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{PERBANDINGAN WAKTU PEMROSESAN}
 \label{tab:processing_time}
@@ -243,7 +243,7 @@ Min-Max & 25-72 & 4-11 & - \\ \hline
 
 Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001, Cohen's d=3.79). Gambar \ref{fig:performance} menunjukkan tren waktu pemrosesan.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{performance_comparison.jpg}
 \caption{Perbandingan Waktu Pemrosesan Manual vs Digital}
@@ -253,7 +253,7 @@ Paired t-test menunjukkan perbedaan yang sangat signifikan (t(49)=26.84, p<0.001
 \subsubsection{Akurasi Data}
 Tabel \ref{tab:accuracy} menunjukkan perbandingan tingkat akurasi data.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{PERBANDINGAN AKURASI DATA}
 \label{tab:accuracy}
@@ -272,7 +272,7 @@ Sistem digital menunjukkan performa teknis yang baik dengan average response tim
 \subsection{Analisis Usabilitas}
 Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar deviasi 9.2, range 55.0-90.0, dengan grade B (Good).
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{sus_distribution.jpg}
 \caption{Distribusi Skor System Usability Scale}
@@ -282,7 +282,7 @@ Hasil survei SUS (n=42) menghasilkan mean SUS score 76.8, median 78.0, standar d
 \subsection{Dampak Organisasional}
 Tabel \ref{tab:organizational} menunjukkan dampak kuantitatif terhadap organisasi.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{DAMPAK ORGANISASIONAL}
 \label{tab:organizational}
@@ -299,14 +299,14 @@ Keluhan/bulan & 11 & 2 \\ \hline
 \subsection{Implementasi Antarmuka}
 Implementasi antarmuka dirancang dengan prinsip user experience design.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{wartawan.jpg}
 \caption{Halaman Pendaftaran Wartawan}
 \label{fig:halaman_daftar}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{admin1.jpg}
 \caption{Halaman Dashboard Admin}
@@ -316,7 +316,7 @@ Implementasi antarmuka dirancang dengan prinsip user experience design.
 \subsection{Pengujian Fungsional}
 Pengujian sistem menggunakan metode Black Box Testing.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \caption{PENGUJIAN BLACKBOX}
 \label{tab:blackbox}
@@ -348,6 +348,7 @@ Untuk penelitian mendatang, disarankan melakukan studi multi-site pada berbagai 
 
 Penelitian ini berhasil diselesaikan tidak lepas dari bantuan beberapa pihak, untuk itu penulis ingin mengucapkan terima kasih kepada Rektor Universitas Negeri Manado, Dekan Fakultas Teknik Universitas Negeri Manado, Pimpinan dan Dosen Program Studi Teknik Informatika Fakultas Teknik Universitas Negeri Manado, Dosen Pembimbing Akademik, Dosen Pembimbing Skripsi, Orang Tua dan Keluarga, Teman-teman Teknik Informatika Angkatan 2023, dan Dinas Komunikasi dan Informatika.
 
+\clearpage
 \section*{DAFTAR PUSTAKA}
 \renewcommand\refname{} 
 \vspace{-1cm}
