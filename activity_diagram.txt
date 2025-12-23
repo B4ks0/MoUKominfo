@@ -1,0 +1,80 @@
+Wartawan                                     Sistem                                      Admin
+---------                                    ------                                      -----
+
+[ Start ]
+    |
+    v
+( Mengakses Halaman Pendaftaran )
+    |
+    v
+( Mengisi Formulir Pendaftaran )
+    |
+    v
+( Submit Formulir )
+    |
+    `------------------------------------------> ( Menerima Data Pendaftaran )
+                                                        |
+                                                        v
+                                                  ( Menyimpan Data ke Database )
+                                                        |
+                                                        v
+                                                  ( Menampilkan Notifikasi Sukses )
+                                                        |
+                                                        `---------------------------> [ End ]
+                                                                                   (Wartawan)
+
+
+                                                                                             [ Start ]
+                                                                                                 |
+                                                                                                 v
+                                                                                           ( Login ke Panel Admin )
+                                                                                                 |
+                                                                                                 v
+                                                                                           ( Menampilkan Dashboard )
+                                                                                                 |
+                                                                                                 v
+                                                                                           ( Mengakses Data Pendaftar )
+                                                                                                 |
+                                                                                                 v
+                                                                                           ( Memilih Pendaftar )
+                                                                                                 |
+                                                                                                 v
+                                                                                           ( Meninjau Detail Data )
+                                                                                                 |
+                                                                                                 v
+                                                                                         <  Data Valid?  >
+                                                                                         |        |
+                                                                                    [Ya] |        | [Tidak]
+                                                                                         v        v
+                                                                               ( Ubah Status 'Disetujui' )   ( Ubah Status 'Ditolak' )
+                                                                                         |        |
+                                                                                         `--------+--------`
+                                                                                                  |
+                                                                                                  v
+                                                                                             ( Simpan Perubahan )
+                                                                                                  |
+                                                                                                  v
+                                                                                               [ End ]
+                                                                                                (Admin)
+
+[ Start ] (Wartawan - Cek Status)
+    |
+    v
+( Mengakses Halaman Cek Status )
+    |
+    v
+( Memasukkan Nomor Registrasi )
+    |
+    `------------------------------------------> ( Mencari Data di Database )
+                                                        |
+                                                        v
+                                                  < Ditemukan? >
+                                                  |      |
+                                             [Ya] |      | [Tidak]
+                                                  v      v
+                                       ( Menampilkan Status )  ( Menampilkan Pesan Error )
+                                                  |      |
+                                                  `------'
+                                                     |
+                                                     v
+                                                  [ End ]

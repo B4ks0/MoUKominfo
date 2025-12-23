@@ -19,11 +19,13 @@ def register(request):
 
 def check_status(request):
     status_result = None
+    show_toast = False
     if request.method == 'POST':
         nrp = request.POST.get('nrp')
         if nrp:
             try:
                 wartawan = Wartawan.objects.get(nrp=nrp)
+                show_toast = True
                 status_result = {
                     'nrp': nrp,
                     'status': dict(Wartawan.STATUS_CHOICES).get(wartawan.status, wartawan.status),
@@ -32,4 +34,4 @@ def check_status(request):
                 }
             except Wartawan.DoesNotExist:
                 messages.error(request, 'NRP tidak ditemukan.')
-    return render(request, 'pendaftaran/check_status.html', {'status_result': status_result})
+    return render(request, 'pendaftaran/check_status.html', {'status_result': status_result, 'show_toast': show_toast})

@@ -2,10 +2,69 @@
 
 {% block title %}Cek Status - Portal Kerja Sama Wartawan{% endblock %}
 
+{% block extra_head %}
+<style>
+    /* Step Progress Bar */
+    .step-progress {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .step {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .step-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e9ecef;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border: 2px solid #dee2e6;
+        transition: all 0.3s ease;
+    }
+    .step.active .step-circle {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+    .step.completed .step-circle {
+        background-color: #28a745;
+        color: white;
+        border-color: #28a745;
+    }
+    .step-line {
+        width: 100px;
+        height: 2px;
+        background-color: #dee2e6;
+        margin: 0 10px;
+    }
+    .step.completed + .step-line {
+        background-color: #28a745;
+    }
+    .step-label {
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8rem;
+        color: #6c757d;
+        text-align: center;
+        white-space: nowrap;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-8">
             <h2 class="text-center mb-4">Cek Status Permohonan</h2>
             <form method="post">
                 {% csrf_token %}
@@ -16,18 +75,30 @@
                 <button type="submit" class="btn btn-primary w-100">Cek Status</button>
             </form>
 
-            {% if messages %}
-            <div class="mt-3">
-                {% for message in messages %}
-                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
-            
             {% if status_result %}
+            <!-- Step Progress Bar -->
+            <div class="step-progress mt-5">
+                <div class="step completed">
+                    <div class="step-circle"><i class="fas fa-user"></i></div>
+                    <div class="step-label">Biodata</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step completed">
+                    <div class="step-circle"><i class="fas fa-file-alt"></i></div>
+                    <div class="step-label">Dokumen</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step {% if status_result.status == 'Pending' %}active{% elif status_result.status == 'Approved' %}completed{% endif %}">
+                    <div class="step-circle"><i class="fas fa-clock"></i></div>
+                    <div class="step-label">Pending</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step {% if status_result.status == 'Approved' %}completed{% endif %}">
+                    <div class="step-circle"><i class="fas fa-check-circle"></i></div>
+                    <div class="step-label">Verifikasi</div>
+                </div>
+            </div>
+
             <div class="card mt-4">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">Hasil Pencarian</h5>
@@ -47,4 +118,20 @@
         </div>
     </div>
 </div>
+
+{% block extra_js %}
+{% if show_toast %}
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Nomor Registrasi Kerjasama Ditemukan',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+</script>
+{% endif %}
+{% endblock %}
 {% endblock %}
